@@ -11,7 +11,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return "<h1>Posts Page</h1>";
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Product\CreateProductRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use App\Models\Product;
 use App\Models\User;
 use App\Notifications\MyFirstNotification;
@@ -12,7 +13,15 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::paginate(10);
-        return view('product.index', ['products' => $products]);
+        $routes = collect(Route::getRoutes())->map(function ($route){
+            return [
+                'uri'=> $route->uri,
+                'methods'=> $route->methods(),
+                'action'=> $route->getActionName(),
+                'name' => $route->getName(),
+            ];
+        });
+        return view('product.index', ['products' => $products, 'routes' => $routes]);
     }
     public function create()
     {
@@ -38,7 +47,7 @@ class ProductController extends Controller
         return back()->withSuccess('Product Added Successfully');
     }
     public  function update(createProductRequest $request, $id){
-        $validated = $request->validated();
+        $request->validated();
         $product = Product::where('id', $id)->first();
         $product->product_name = $request->input('product_name');
         $product->description = $request->input('description');

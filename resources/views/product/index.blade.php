@@ -39,6 +39,52 @@
             </tbody>
         </table>
         {{ $products->links()}}
+            <h1>All Routes</h1>
+            <table border="1">
+                <thead>
+                <tr>
+                    <th>URI</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                    <th>Methods</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach ($routes as $route)
+                    <tr>
+                        <td>{{ $route['uri'] }}</td>
+                        <td>{{ $route['name'] }}</td>
+                        <td>{{ $route['action'] }}</td>
+                        <td>{{ implode(', ', $route['methods']) }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+            <br><br>
+        {{ 5+5 }}
+        <br><br>
+        {{ "Hello world" }}
+        <br><br>
+        {!!  "<h1>My self devendra verma</h1>" !!}
+        <br><br>
+                @php
+                $users = ['vikash', 'dev', 'sahil']
+                    @endphp
+            <ul>
+            @foreach ($users as $user)
+               @if($loop->first)
+                        <li class="text-uppercase text-danger">  {{ $loop->iteration }} - {{  $user  }}</li>
+                    @elseif($loop->last)
+                        <li class="text-uppercase text-primary">  {{ $loop->iteration }} - {{  $user  }}</li>
+               @endif
+
+            @endforeach
+            </ul>
+            <ul>
+            @foreach($users as $user)
+                    {{ $loop->iteration }}
+            @endforeach
+            </ul>
     </div>
 </div>
 </x-layout>
