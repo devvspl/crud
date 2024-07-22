@@ -5,6 +5,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PdfController;
 
+function  getUsers()
+{
+  return [
+      1 => ['name'=> "Rahul", 'email' => "rahul@gmail.com", 'created_at' => "2022-01-01 00:00:00"],
+      2 => ['name'=> "Sahil", 'email' => "sahil@gmail.com", 'created_at' => "2022-01-01 00:00:00"],
+      3 => ['name'=> "Vikash", 'email' => "vikash@gmail.com", 'created_at' => "2022-01-01 00:00:00"],
+  ];
+}
 Route::get('/', [ProductController::class, 'index'])->name('home');
 Route::get('/create', [ProductController::class, 'create']);
 Route::post('/save-product', [ProductController::class, 'store']);
@@ -33,6 +41,16 @@ Route::prefix('page')->group(function (){
         return view('pages.javascript');
     });
 });
+Route::get('/users', function (){
+    $getUsers = getUsers();
+    return view('users', ['users' => $getUsers]);
+});
+Route::get('user/{id}', function ($id) {
+    $users = getUsers();
+    abort_if(!isset($users[$id]), 404);
+    $user = $users[$id] ?? null;
+    return view('user', ['user' => $user]);
+})->name('view.user');
 Route::fallback(function (){
    return view('error.404');
 });
