@@ -4,7 +4,7 @@ use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PdfController;
-
+use App\Http\Controllers\PageController;
 function  getUsers()
 {
   return [
@@ -51,6 +51,7 @@ Route::get('user/{id}', function ($id) {
     $user = $users[$id] ?? null;
     return view('user', ['user' => $user]);
 })->name('view.user');
+Route::get('show-user', [PageController::class, 'showUser']);
 Route::fallback(function (){
    return view('error.404');
 });
