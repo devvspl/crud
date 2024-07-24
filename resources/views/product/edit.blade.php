@@ -7,6 +7,7 @@
                 </strong>
             </div>
         @endif
+
         <form style="width: 500px" action="/edit-product/{{$product->id}}" method="post">
             @csrf
             <div class="form-group">
@@ -26,6 +27,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-secondary "><a class="text-white" href="/">Back</a></button>
         </form>
     </div>
 </x-layout>
