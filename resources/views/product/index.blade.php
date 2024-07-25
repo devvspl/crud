@@ -39,7 +39,7 @@
             </tbody>
         </table>
         {{ $products->links()}}
-            <h1>All Routes</h1>
+            <h4>All Routes</h4>
             <table border="1">
                 <thead>
                 <tr>
